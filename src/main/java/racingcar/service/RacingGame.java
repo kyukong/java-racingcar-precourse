@@ -5,10 +5,12 @@ import racingcar.domain.Car;
 
 import static racingcar.type.CarFormat.*;
 import static racingcar.utils.Utils.*;
+import static racingcar.view.Print.*;
 
 public class RacingGame {
 	private ArrayList<Car> cars = new ArrayList<>();
 	private int times = 0;
+	private int maxDistance = 0;
 
 	private void addCar(Car car) {
 		this.cars.add(car);
@@ -48,5 +50,25 @@ public class RacingGame {
 	private void move(Car car) {
 		car.move();
 		car.showPosition();
+	}
+
+	public void win() {
+		setMaxDistance();
+
+		ArrayList<String> winners = new ArrayList<>();
+		for (Car car : cars) {
+			if (car.isMaxDistance(maxDistance)) {
+				winners.add(car.getName());
+			}
+		}
+		printWinners(winners);
+	}
+
+	private void setMaxDistance() {
+		for (Car car : cars) {
+			if (maxDistance < car.getPosition()) {
+				maxDistance = car.getPosition();
+			}
+		}
 	}
 }

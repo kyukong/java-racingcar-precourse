@@ -31,5 +31,6 @@ public class RacingGameController {
 
 	private void play() {
 		racingGame.race();
+		racingGame.win();
 	}
 }

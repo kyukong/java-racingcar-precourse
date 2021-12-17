@@ -13,6 +13,14 @@ public class Car {
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public int getPosition() {
+        return this.position;
+    }
+
     public void move() {
         int pick = pickNumberInRange(CarFormat.RANGE_START.getNumber(), CarFormat.RANGE_END.getNumber());
 
@@ -23,5 +31,9 @@ public class Car {
 
     public void showPosition() {
         printPosition(this.name, this.position);
+    }
+
+    public boolean isMaxDistance(int maxDistance) {
+        return maxDistance == position;
     }
 }
