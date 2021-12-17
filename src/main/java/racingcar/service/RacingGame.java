@@ -18,7 +18,7 @@ public class RacingGame {
 	}
 
 	private String[] splitCars(String cars) {
-		return cars.split(SPLIT.getValue());
+		return cars.split(SPLIT.getValue(), -1);
 	}
 
 	private void addCar(Car car) {

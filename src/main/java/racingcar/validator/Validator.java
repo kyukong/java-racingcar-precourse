@@ -23,7 +23,7 @@ public class Validator {
 	private static void validateCars(String input) {
 		validateEmpty(input, CarError.CARS_EMPTY.getError());
 
-		String[] cars = input.split(CarFormat.SPLIT.getValue());
+		String[] cars = input.split(CarFormat.SPLIT.getValue(), -1);
 		for (String car : cars) {
 			validateEmpty(car, CarError.CAR_EMPTY.getError());
 			validateLength(car, CarError.CAR_LENGTH.getError(), CarFormat.LENGTH.getNumber());
