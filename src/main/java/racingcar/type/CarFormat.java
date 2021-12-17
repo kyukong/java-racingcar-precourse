@@ -2,7 +2,11 @@ package racingcar.type;
 
 public enum CarFormat {
 	SPLIT(","),
-	LENGTH(5);
+	LENGTH(5),
+	POSITION("-"),
+	RANGE_START(0),
+	RANGE_END(9),
+	MOVE(4);
 
 	private int number;
 	private String value;

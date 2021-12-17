@@ -15,6 +15,8 @@ public class RacingGameController {
 	public void start() {
 		writeCars();
 		writeTimes();
+
+		play();
 	}
 
 	private void writeCars() {
@@ -25,5 +27,9 @@ public class RacingGameController {
 	private void writeTimes() {
 		printWriteTimes();
 		racingGame.setTimes(inputTimes());
+	}
+
+	private void play() {
+		racingGame.race();
 	}
 }

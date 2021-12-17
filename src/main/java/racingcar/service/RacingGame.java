@@ -29,4 +29,24 @@ public class RacingGame {
 	public void setTimes(String times) {
 		this.times = Integer.parseInt(times);
 	}
+
+	public void race() {
+		if (times == 0) {
+			return;
+		}
+
+		for (Car car : cars) {
+			move(car);
+		}
+		System.out.println();
+		times -= 1;
+		if (times != 0) {
+			race();
+		}
+	}
+
+	private void move(Car car) {
+		car.move();
+		car.showPosition();
+	}
 }
