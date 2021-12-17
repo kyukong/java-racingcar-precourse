@@ -3,9 +3,12 @@ package racingcar.validator;
 import java.util.Arrays;
 import java.util.HashSet;
 import racingcar.error.CarError;
+import racingcar.error.TimesError;
 import racingcar.type.CarFormat;
+import racingcar.type.TimesFormat;
 
 import static racingcar.view.Print.*;
+import static racingcar.utils.Utils.*;
 
 public class Validator {
 	private static final String EMPTY = "";
@@ -23,12 +26,27 @@ public class Validator {
 	private static void validateCars(String input) {
 		validateEmpty(input, CarError.CARS_EMPTY.getError());
 
-		String[] cars = input.split(CarFormat.SPLIT.getValue(), -1);
+		String[] cars = getTrimList(input.split(CarFormat.SPLIT.getValue(), -1));
 		for (String car : cars) {
 			validateEmpty(car, CarError.CAR_EMPTY.getError());
 			validateLength(car, CarError.CAR_LENGTH.getError(), CarFormat.LENGTH.getNumber());
 			validateDuplicated(cars, CarError.CAR_DUPLICATED.getError());
 		}
+	}
+
+	public static boolean isValidatedTimes(String input) {
+		try {
+			validateTimes(input);
+		} catch (IllegalArgumentException error) {
+			printErrorMessage(error);
+			return false;
+		}
+		return true;
+	}
+
+	private static void validateTimes(String input) {
+		validateEmpty(input, TimesError.EMPTY.getError());
+		validateOverNumber(input, TimesError.OVER.getError(), TimesFormat.OVER.getNumber());
 	}
 
 	private static void validateEmpty(String input, String message) {
@@ -38,7 +56,7 @@ public class Validator {
 	}
 
 	private static void validateLength(String input, String message, int length) {
-		if (input.length() != length) {
+		if (input.length() > length) {
 			throw new IllegalArgumentException(message);
 		}
 	}
@@ -46,6 +64,18 @@ public class Validator {
 	private static void validateDuplicated(String[] list, String message) {
 		HashSet<String> notDuplicatedList = new HashSet<>(Arrays.asList(list));
 		if (notDuplicatedList.size() != list.length) {
+			throw new IllegalArgumentException(message);
+		}
+	}
+
+	private static void validateOverNumber(String input, String message, int over) {
+		int number;
+		try {
+			number = Integer.parseInt(input);
+			if (number < over) {
+				throw new IllegalArgumentException(message);
+			}
+		} catch (Exception e) {
 			throw new IllegalArgumentException(message);
 		}
 	}

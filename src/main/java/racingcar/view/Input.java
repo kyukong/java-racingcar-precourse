@@ -12,4 +12,13 @@ public class Input {
 
 		return input;
 	}
+
+	public static String inputTimes() {
+		String input = readLine();
+		if (!isValidatedTimes(input)) {
+			input = inputTimes();
+		}
+
+		return input;
+	}
 }

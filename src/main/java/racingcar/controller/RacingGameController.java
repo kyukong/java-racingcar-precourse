@@ -14,10 +14,16 @@ public class RacingGameController {
 
 	public void start() {
 		writeCars();
+		writeTimes();
 	}
 
 	private void writeCars() {
 		printWriteCars();
 		racingGame.setCars(inputCars());
+	}
+
+	private void writeTimes() {
+		printWriteTimes();
+		racingGame.setTimes(inputTimes());
 	}
 }
